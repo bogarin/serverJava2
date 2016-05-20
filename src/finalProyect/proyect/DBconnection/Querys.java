@@ -1,5 +1,8 @@
 package finalProyect.proyect.DBconnection;
 import java.sql.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 import javax.jws.WebMethod;
 import javax.jws.WebResult;
@@ -48,6 +51,24 @@ public class Querys {
 	@WebMethod()
 	public boolean verificarUsuario(String username,String password){
 		return consultaUsuario(username).equals(password);
+	}
+	
+	@WebMethod()
+	public boolean comentarios(String titulo,String descripcion,int idUsuario){
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Calendar cal = Calendar.getInstance();
+		String fecha =dateFormat.format(cal.getTime());
+		System.out.println(fecha);
+		query= "INSERT INTO tbl_comment VALUES(NULL, '"+titulo+"', '"+descripcion+"',"+idUsuario+",'"+fecha+"')";
+		try {
+			conectando.update(query);
+			return true;
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+		
 	}
                
 
