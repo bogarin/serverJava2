@@ -1,3 +1,6 @@
 build/*
 WebContent/*
 PrincipalTest.java
+.settings
+.classpath
+.project
